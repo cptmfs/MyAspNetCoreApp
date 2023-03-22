@@ -1,0 +1,9 @@
+﻿ViewBag.name = " Asp.Net Core ";  ViewBag bu şekilde veri taşınabiliyor index'lere
+
+ViewData["age"]= 30;   ViewData ise bu syntax ile index'lere veri taşınabiliyor..
+
+ViewData["names"]= new List<string>() { "Ferit", "Şeyma", "Şimşek" }; Buradaki veriyi index'e aktarırken foreach ile tüm elemanlarını dönmesiyle verilere erişiyoruz.
+
+ViewData["names"]' in tipi belirsiz olduğu için index'te ViewData["names"] as List<string> yazıyoruz 
+
+TempData ***  Farklı Actionlardan ulaşılabiliyor en önemli özelliği bu ***
