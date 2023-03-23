@@ -2,20 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    var alert = " Bu Bir Uyarı Mesajıdır.";
 }
 
 @model List<Product>; // küçük harfle model içerisine tipini belirterek sınıfı yazdırdık
 
-
-
-    <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      Bootstrap
-    </a>
-  </div>
-</nav>
 <h1>Products</h1>
 <hr />
     @foreach (var item in Model) //foreach ile dönerken Model yazınca içerisindeki dataya eriştik..
@@ -36,6 +28,46 @@
 @foreach (var item in ViewData["lesson"] as List<string>)
 {
     <p>@item</p>
+}
+
+<hr />
+
+<div>Günün Tarihi : @DateTime.Now.ToShortDateString()</div>
+
+@{
+    // Çok kod satırı yazıcaksak @{} içerisinde yazacağız..
+
+    var datetime = DateTime.Now.ToShortDateString();
+    var datetime2 = DateTime.Now.ToLongDateString();
+    var message = "Merhabalar ";
+    @: Bugünün Tarihi : @datetime
+    <div>Mesaj : @message</div>
+    <text>Bugünün Tarihi : @datetime2</text>
+}
+
+@if (message!="")
+{
+    <p>Messaj var</p>
+}
+else if (DateTime.IsLeapYear(DateTime.Now.Year))
+{
+    <p>Artık YIL</p>
+}
+else
+{
+    <h1>@alert</h1>
+        <p>Mesaj YOK</p>
+}
+
+@for (int i = 1; i <= 10; i++)
+{
+    <p>@i. Gün</p>
+}
+<hr />
+
+@foreach (var item in Enumerable.Range(1,10).ToList())
+{
+    <p>@item. Saat</p>
 }
 
 
