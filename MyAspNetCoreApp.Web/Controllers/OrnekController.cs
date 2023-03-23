@@ -18,7 +18,14 @@ namespace MyAspNetCoreApp.Web.Controllers
             //ViewBag.person = new { Id = 1, name = "ferit", age = 30 };
 
             //ViewBag.name = "Muhammed Ferit";
-            //TempData["surname"] = "Şimşek";
+            //TempData["surname"] = "Şimşek"; 
+
+            ViewBag.name = "Kurumsal Kaynak Planlama ve Veri Analizi";
+            ViewData["unvan"] = "Jr.Software Developer";
+
+            ViewData["lesson"] = new List<string>() { "C#", "Asp.Net MVC", "SQL Server", "HTML/CSS/JS", "OOP", "Flutter" };
+
+
 
             var productList = new List<Product>()
             {
@@ -36,6 +43,8 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Index2()
         {
             var surname = TempData["surname"];
+            ViewData["unvan"] = "Jr.Software Developer";
+
             return View();
         }
 

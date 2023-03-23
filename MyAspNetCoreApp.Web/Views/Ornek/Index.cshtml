@@ -5,6 +5,17 @@
 }
 
 @model List<Product>; // küçük harfle model içerisine tipini belirterek sınıfı yazdırdık
+
+
+
+    <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      Bootstrap
+    </a>
+  </div>
+</nav>
 <h1>Products</h1>
 <hr />
     @foreach (var item in Model) //foreach ile dönerken Model yazınca içerisindeki dataya eriştik..
@@ -16,8 +27,19 @@
 
 <h1>Muhammed Ferit Simsek</h1>
 <hr />
+<p>Ünvan : @ViewData["unvan"]</p>
+<p>Kurs Ad : @ViewBag.name</p>
 
-<p>Ad : @ViewBag.name</p>
+<hr />
+
+<h1>Alınan Eğitimler</h1>
+@foreach (var item in ViewData["lesson"] as List<string>)
+{
+    <p>@item</p>
+}
+
+
+
 @*@{
     var name = ViewBag.name;
     <p>@name</p>
