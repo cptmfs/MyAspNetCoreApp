@@ -1,0 +1,29 @@
+﻿@using static MyAspNetCoreApp.Web.Controllers.ExampleController;
+@{
+    ViewData["Title"] = "ExampleController Index Sayfasıdır.";
+    Layout = "ExampleLayout";
+}
+
+@section header
+    {
+    <h1>FeritKaptan - MVC</h1>
+}
+
+@*@model MyViewModel*@
+<div class="social-icons">
+<p>Selam</p>
+@*    @await Html.PartialAsync("_LinkedInPartialView", Model.LinkedInUrl)
+    @await Html.PartialAsync("_GithubPartialView",Model.GithubUrl)*@
+</div>
+
+@section footer
+    {
+    <p>Created by cptmfs - 2023.</p>
+}
+
+
+
+
+
+
+

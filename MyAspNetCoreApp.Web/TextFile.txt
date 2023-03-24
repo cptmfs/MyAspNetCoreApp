@@ -37,3 +37,7 @@ NOT : Önce CSS kodları çalışır çünkü kullanıcıya önce görseller gö
 etkilişime geçmesine imkan veren şeyler en altta js dosyalarından gelir..
 Performans açısından bu daha iyidir..
 
+--- Partial View ---
+Her zaman değil ama ihtiyac duyulan sayfalarda kullanılacak alanlardır..
+Örneğin login menu sadece login ekranı ve admin panelinde gözüksün gibi
+Social İcons diye bi alan var mesela sadece ana sayfa ve iletişim sayfasında gözüksün isteyebiliriz..
