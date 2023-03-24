@@ -36,3 +36,4 @@ gösterilen en alt kısıma eklenecektir..}
 NOT : Önce CSS kodları çalışır çünkü kullanıcıya önce görseller gösterilir, sonra kullanıcı herhangi bir
 etkilişime geçmesine imkan veren şeyler en altta js dosyalarından gelir..
 Performans açısından bu daha iyidir..
+
