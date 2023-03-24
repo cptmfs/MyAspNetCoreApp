@@ -41,3 +41,9 @@ Performans açısından bu daha iyidir..
 Her zaman değil ama ihtiyac duyulan sayfalarda kullanılacak alanlardır..
 Örneğin login menu sadece login ekranı ve admin panelinde gözüksün gibi
 Social İcons diye bi alan var mesela sadece ana sayfa ve iletişim sayfasında gözüksün isteyebiliriz..
+
+
+Yazılma Tipleri : 
+1-)		<partial name="_MenuPartialView" />
+2-)		@await Html.PartialAsync("_MenuPartialView")
+3-)		@Html.Partial("_MenuPartialView")
