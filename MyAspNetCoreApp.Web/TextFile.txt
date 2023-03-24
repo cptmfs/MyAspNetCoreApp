@@ -7,3 +7,32 @@ ViewData["names"]= new List<string>() { "Ferit", "Şeyma", "Şimşek" }; Buradak
 ViewData["names"]' in tipi belirsiz olduğu için index'te ViewData["names"] as List<string> yazıyoruz 
 
 TempData ***  Farklı Actionlardan ulaşılabiliyor en önemli özelliği bu ***
+
+Bİr Layout Tüm cshtml sayfalarında ortak olarak kullanılabilir. 
+Eğer bunu değiştirmek istiyorsak yeni bir layout oluştur ve Sonra bunu kullanmak istediğin cshtml'de
+kafada bunu tanımla Layout = "yeniLayout"; gibi 
+
+ @RenderBody() --> layout'ın içinde index gibi cshtml'lerin içeriğinin bulundugu alan RenderBody'dir.
+
+
+
+ Eğer Layout içerisinde belli bir kısma belli kodları yer almasını istiyorsak layout içerisinde 
+ Örn: HEader kısmında         @await RenderSectionAsync("header", required: false) bu kodu yazıyoruz.
+
+ Not: required: false kısmı true olursa , bu Layoutu kullanan tüm sayfalarda özel section kısmı 
+ tanımlanmak zorunda olacaktır..
+ Sonrasında cshtmlde @@section header
+{
+
+
+}   gibi yazımla bu süslü tırnaklar içerisine yazılanlar layouttaki istediğimiz yere gider.
+
+
+Örneğin =  Ana layoutun en altında bu kod yer alır @await RenderSectionAsync("Scripts", required: false)
+
+neden çünkü her cshtml de eklenen kodlar @section Scripts {  buraya yazılanlar hepsi layoutda yeri 
+gösterilen en alt kısıma eklenecektir..}
+
+NOT : Önce CSS kodları çalışır çünkü kullanıcıya önce görseller gösterilir, sonra kullanıcı herhangi bir
+etkilişime geçmesine imkan veren şeyler en altta js dosyalarından gelir..
+Performans açısından bu daha iyidir..

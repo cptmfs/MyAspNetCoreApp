@@ -1,9 +1,15 @@
-﻿
+﻿@using static MyAspNetCoreApp.Web.Controllers.OrnekController;
+
 @{
     ViewData["Title"] = "Index2";
 }
+@model List<Images>;
+<h1>Personel Bilgiler</h1>
+<p>İsim : Muhammed Ferit</p>
 
-<h1>Personel</h1>
-<p>ad : @ViewBag.name</p>
-<p>soy isim : @TempData["surname"]</p>
-<p>Ünvan : @ViewData["unvan"]</p>
+
+@foreach (var item in Model)
+{
+    <img src="@Html.DisplayFor(modelItem=>item.ChildPng)" />
+
+}

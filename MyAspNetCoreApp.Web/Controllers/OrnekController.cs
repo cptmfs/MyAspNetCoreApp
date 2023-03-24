@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyAspNetCoreApp.Web.Models;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
@@ -8,6 +9,10 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             public int Id { get; set; }
             public string Name { get; set; }
+        }
+        public class Images
+        {
+            public string ChildPng { get; set; }
         }
         public IActionResult Index()
         {
@@ -24,6 +29,8 @@ namespace MyAspNetCoreApp.Web.Controllers
             ViewData["unvan"] = "Jr.Software Developer";
 
             ViewData["lesson"] = new List<string>() { "C#", "Asp.Net MVC", "SQL Server", "HTML/CSS/JS", "OOP", "Flutter" };
+
+            
 
 
 
@@ -43,9 +50,18 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Index2()
         {
             var surname = TempData["surname"];
+            ViewBag.name = "Kurumsal Kaynak Planlama ve Veri Analizi";
+
             ViewData["unvan"] = "Jr.Software Developer";
 
-            return View();
+            var image = new List<Images>()
+            {
+                new(){ChildPng="Images/8.png"},
+
+            };
+
+
+            return View(image);
         }
 
         public IActionResult Index3()
