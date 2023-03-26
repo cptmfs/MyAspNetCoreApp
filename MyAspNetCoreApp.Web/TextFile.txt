@@ -63,3 +63,14 @@ ve bunun da veri taşıma sınırı var . Bu yüzden ihtiyaç olmadıgı sürece
 
 
 SONUÇ : Model Binding'de Kullanıcıdan Data Alırken En iyisi HTTP POST ve Tip güvenli olarak almaktır..
+
+-- Dependency Injection --
+
+* Inversion Of Control Principle = içerde newleme yapmasın dışarıdan alsın ..
+* Dependency Inversion Principle = iki class birbirini bilmesin interface aracılıgıyla alsınlar 
+
+ # Singleton ( bir kez üret ) Tek bir nesne örneği üretilir uygulama ayakta oldugu sürece
+ # Scope ' da enjekte edilen nesnenin yaşam döngüsü request'den response 'e kadardır, yani istek geldikten ve istek sonuca ulaşıncaya kadardır. 
+ Bir daha istek (request) gelinceye kadar arka planda tutmaz. 
+ Veritabanı ile ilgili işlemlerde Scope kullanırız.. Örn : db ye bağlantı kursun gidip işlemi yapıp gelsin ve sonra kapansın gibi ..
+

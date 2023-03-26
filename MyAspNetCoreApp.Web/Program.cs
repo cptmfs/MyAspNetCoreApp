@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>  //DBContext ekle <AppDbC
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon")); // SqlServer kullan , builder'ýn configration dediðimiz "appsettings.json" içerisindeki configrationlarý okur. .GetConnectionString ile oradaki Connection String'i al dedik ? hangisini ? ("SqlCon") parantez içerisinde connectionString'e verdiðimiz ismi belirttik..
 });
+
+builder.Services.AddScoped<IHelper, Helper>(); //Bir singleton ( bir kez üret ) nesne ekleyeceksin,  herhangi bir class'ýn constructor veya methodunda IHelper görürsen , Helper sýnýfýndan bir nesne üret // Scope Çevirdik..
+
 
 var app = builder.Build();
 
