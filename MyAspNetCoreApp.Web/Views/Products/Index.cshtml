@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -8,6 +7,14 @@
 
 
 <h1>Ürünler</h1>
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-success" role="alert">
+       @TempData["status"]
+    </div>
+
+}
+
 <a asp-controller="products" asp-action="add">Ürün Ekle</a>
 <table class="table">
     <thead>
@@ -19,7 +26,7 @@
             <th>Color</th>
             <th>İşlem</th>
         </tr>
-        
+
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -37,6 +44,6 @@
             </tr>
         }
     </tbody>
-    
+
 </table>
 

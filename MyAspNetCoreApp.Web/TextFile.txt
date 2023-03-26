@@ -47,3 +47,19 @@ Yazılma Tipleri :
 1-)		<partial name="_MenuPartialView" />
 2-)		@await Html.PartialAsync("_MenuPartialView")
 3-)		@Html.Partial("_MenuPartialView")
+
+-- Model Bindig -- 
+
+Kullanıcıdan gelen dataların Action methodlarındaki herhangi bir nesneye değişkene atanmasıdır..
+
+
+--- HTTP GET / HTTP POST ----
+
+Örneğin Ürün ekleme sayfasında , kullanıcı ürün ekleye bastıgında görüntülenecek  sayfayı getiren HTTP GET ,
+Kullanıcı Ekle butonuna bastığında olacakları ( veri tabanına ürünü kaydetme gibi ) yapan HTTP POST.
+
+HTTP get ile veri aldıgımızda query de taşır verileri yani https://localhost:7223/Products/SaveProduct?Name=Logitech+G-400S&Price=455&Stock=250&Color=Black gibi..
+ve bunun da veri taşıma sınırı var . Bu yüzden ihtiyaç olmadıgı sürece HTTP POST kullanmak gerekiyor . Taşınan verilerin şifrelenmesi için .. 
+
+
+SONUÇ : Model Binding'de Kullanıcıdan Data Alırken En iyisi HTTP POST ve Tip güvenli olarak almaktır..

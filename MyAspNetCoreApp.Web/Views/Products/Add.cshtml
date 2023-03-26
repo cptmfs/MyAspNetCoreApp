@@ -2,6 +2,47 @@
 @{
     ViewData["Title"] = "Add";
 }
-
+@model Product
 <h1>Ürün Ekleme</h1>
+
+<form asp-controller="Products" asp-action="Add" method="post">
+    <label>Ürün İsmi :</label>
+    <input type="text" asp-for="Name" />
+    <br />
+    <label>Ürün Fiyat :</label>
+    <input type="text" asp-for="Price" />
+    <br />
+    <label>Ürün Stok :</label>
+    <input type="text" asp-for="Stock" />
+    <br />
+    <label>Ürün Renk :</label>
+    <input type="text" asp-for="Color" />
+    <br />
+
+    <button type="submit" >Ürün Kaydet</button>
+
+
+
+</form>
+
+@*1 ve 2. Yöntem
+<form asp-controller="Products" asp-action="Add" method="post">
+    <label>Ürün İsmi :</label>
+    <input type="text" name="Name" />
+    <br />
+    <label>Ürün Fiyat :</label>
+    <input type="text" name="Price" />
+    <br />
+    <label>Ürün Stok :</label>
+    <input type="text" name="Stock" />
+    <br />
+    <label>Ürün Renk :</label>
+    <input type="text" name="Color" />
+    <br />
+
+    <button type="submit" >Ürün Kaydet</button>
+
+
+</form>
+*@
 
