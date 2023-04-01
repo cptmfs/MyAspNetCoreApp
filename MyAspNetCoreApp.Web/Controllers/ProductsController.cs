@@ -37,12 +37,9 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         }
 
-        public IActionResult Index([FromServices]IHelper helper2)
+        public IActionResult Index()
         {
-            var text = "Asp.Net";
-            var upperText = _helper.Upper(text);
 
-            var status=_helper.Equals(helper2);
             //var products = _productRepository.GetAll();
             var products = _context.Products.ToList();
             return View(products);
@@ -59,6 +56,13 @@ namespace MyAspNetCoreApp.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.Discount = new Dictionary<string, int>() 
+            {
+                {"%10",10 }, 
+                {"%15",15},
+                {"%20",20},
+                {"%30",30 }
+            };
             return View();
         }
         [HttpPost]
@@ -121,6 +125,14 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Update(int id)
         {
             var product = _context.Products.Find(id);
+
+            ViewBag.Discount = new Dictionary<string, int>()
+            {
+                {"%10",10 },
+                {"%15",15},
+                {"%20",20},
+                {"%30",30 }
+            };
             return View(product);
         }
         [HttpPost]
@@ -130,6 +142,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
             TempData["status"] = "Ürün Başarıyla Güncellendi.";
+           
             return RedirectToAction("Index");
         }
     }

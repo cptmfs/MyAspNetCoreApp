@@ -24,7 +24,12 @@
             <th>Fiyat</th>
             <th>Stok</th>
             <th>Color</th>
+            <th>Yayınlansın mı ?</th>
+            <th>İndirim Oranı</th>
+            <th>Ürün Açıklaması</th>
             <th>İşlem</th>
+
+
         </tr>
 
     </thead>
@@ -37,9 +42,25 @@
                 <td>@item.Price</td>
                 <td>@item.Stock</td>
                 <td>@item.Color</td>
+                <td>
+                    @(item.IsPublish ? "Evet" : "Hayır")
 
-                <td><a asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a></td>
-                <td><a asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a></td>
+                </td>
+                <td>@item.Discount</td>
+                <td>
+                    @if (item.Description.Length>20)
+                    {
+                        @item.Description.Substring(0,20)<text>...</text>
+                    }
+                    else
+                    {
+                        @item.Description
+                    }
+                </td>
+
+                <td><a asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                <a asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+                </td>
 
             </tr>
         }

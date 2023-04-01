@@ -74,3 +74,38 @@ SONUÇ : Model Binding'de Kullanıcıdan Data Alırken En iyisi HTTP POST ve Tip
  Bir daha istek (request) gelinceye kadar arka planda tutmaz. 
  Veritabanı ile ilgili işlemlerde Scope kullanırız.. Örn : db ye bağlantı kursun gidip işlemi yapıp gelsin ve sonra kapansın gibi ..
 
+
+
+                                             ----------             Form Elements               ----------
+ --         asp-for         --
+
+  Bunlara Tag Helper deniyor.
+
+  Kullanıcıdan veri almada kullanılır..
+
+  ASP.Net tag helper kullanırken kullanıcıdan veri alacağımız yerlerde açık açık type belirtmemize gerek kalmadan kendisi almak istediğimiz değerin tipine bakıp 
+  (daha önceden property'de belirttiğimiz tipe strin,int,bool ) ona göre type belirlemesi yapıyor..
+
+ Eğer asp-for ile  asp-for="Name"  gibi tanımlama yaptıysak tırnak içinde yazan kısmın tipine uygun olarak otomatik bir type ataması yapıyor
+ Örnek vericek olursak asp-for="Stock" diyince stok bilgisi int olarak tutuldugu için type'ı number olarak ayarlıyor
+ asp-for kullanmıyorken şöyle yapardık --> <input type="text" yazıyorduk
+
+ Eğer olurda otomatik gelen type'ı ezmek istersek , input içerisine açık açık eklememiz gerekir type="text" örneğin number olanı text yapıyoruz  
+
+         <input type="text" class="form-control" asp-for="Stock">
+
+
+          --         Dictionary         --
+
+
+    new Dictionary<string, int>()  listede bir string değer tutucam ve onun bir int karşılığı  olacak örnek aşağıdaki gibi ; 
+
+     ViewBag.Discount= new Dictionary<string, int>() 
+            {
+                {"%10",10 }, 
+                {"%15",15},
+                {"%20",20},
+                {"%30",30 }
+            };
+
+    Sonra bunu kullanırken foreach de döndürdüğümüzde var item olsun .. String değeri kullanırken @item.Key   value değeri içinse @item.Value seçiyoruz..
