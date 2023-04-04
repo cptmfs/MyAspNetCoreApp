@@ -26,6 +26,7 @@
             <th>Color</th>
             <th>Yayınlansın mı ?</th>
             <th>İndirim Oranı</th>
+            <th>Yayınlanma Tarihi</th>
             <th>Ürün Açıklaması</th>
             <th>İşlem</th>
 
@@ -47,6 +48,7 @@
 
                 </td>
                 <td>@item.Discount</td>
+                <td>@item.PublishDate</td>
                 <td>
                     @if (item.Description.Length>20)
                     {
@@ -57,6 +59,7 @@
                         @item.Description
                     }
                 </td>
+
 
                 <td><a asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
                 <a asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>

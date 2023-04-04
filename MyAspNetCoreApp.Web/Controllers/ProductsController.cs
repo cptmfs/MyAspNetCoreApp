@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
 
@@ -63,7 +64,20 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {"%20",20},
                 {"%30",30 }
             };
+
+            ViewBag.ColorSelect = new SelectList(new List<ColorList>()
+            {
+                new() {Data="Kırmızı" , Value="Red"},
+                new() {Data="Mavi" , Value="Blue"},
+                new() {Data="Siyah" , Value="Black"},
+                new() {Data="Beyaz" , Value="White"},
+
+            }, "Value", "Data");
+
+
+
             return View();
+
         }
         [HttpPost]
         public IActionResult Add(Product newProduct) // Tip güvenli sistem.    // 3. YÖNTEM ** Best Practices **
@@ -133,6 +147,15 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {"%20",20},
                 {"%30",30 }
             };
+            ViewBag.ColorSelect = new SelectList(new List<ColorList>()
+            {
+                new() {Data="Kırmızı" , Value="Red"},
+                new() {Data="Mavi" , Value="Blue"},
+                new() {Data="Siyah" , Value="Black"},
+                new() {Data="Beyaz" , Value="White"},
+
+            }, "Value", "Data",product.Color);
+
             return View(product);
         }
         [HttpPost]
