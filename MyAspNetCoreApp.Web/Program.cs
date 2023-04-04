@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>  //DBContext ekle <AppDbC
 
 builder.Services.AddScoped<IHelper, Helper>(); //Bir singleton ( bir kez üret ) nesne ekleyeceksin,  herhangi bir class'ýn constructor veya methodunda IHelper görürsen , Helper sýnýfýndan bir nesne üret // Scope Çevirdik..
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Çalýþmýþ oldugum assembly'i ver.
 
 var app = builder.Build();
 

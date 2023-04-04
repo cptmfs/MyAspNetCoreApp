@@ -1,30 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Add";
 }
-@model Product
+@model ProductViewModel
 <h1>Ürün Ekleme</h1>
+
+<div class="alert-danger" asp-validation-summary="ModelOnly">
+</div>
+
 
 <form asp-controller="Products" asp-action="Add" method="post">
 
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Ürün ismi :</label>
         <input class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Price" class="form-label">Ürün fiyat :</label>
         <input class="form-control" asp-for="Price">
+        <span class="text-danger" asp-validation-for="Price"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Stock" class="form-label">Ürün stok :</label>
         <input class="form-control" asp-for="Stock">
+        <span class="text-danger" asp-validation-for="Stock"></span>
     </div>
     <div class="mb-3">
-@*        <label asp-for="Color" class="form-label">Ürün renk :</label>
+        @*        <label asp-for="Color" class="form-label">Ürün renk :</label>
         <input class="form-control" asp-for="Color">
-*@
+        *@
         <select class="form-select" asp-for="Color" asp-items="@ViewBag.ColorSelect">
             <option value="">Renk Seçiniz</option>
         </select>
+            <span class="text-danger" asp-validation-for="Color"></span>
+        
     </div>
     <div class="form-check">
         <input class="form-check-input" asp-for="IsPublish">
@@ -49,20 +58,30 @@
     <div class="form-floating mb-3">
         <textarea asp-for="Description" class="form-control" placeholder="Ürün Açıklama" style="height: 100px"></textarea>
         <label asp-for="Description">Ürün Açıklama</label>
+        <span class="text-danger" asp-validation-for="Description"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="PublishDate" class="form-label">Ürün Yayınlanma Tarihi :</label>
         <input class="form-control" asp-for="PublishDate">
+        <span class="text-danger" asp-validation-for="PublishDate"></span>
+
     </div>
-
-
 
     <button class="btn btn-primary" type="submit">Ürün Kaydet</button>
 
 
 
 </form>
+
+@*Client'da çalışmak için , server'i yormamak için. *@
+
+
+@section Scripts 
+    {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
 
 @*1 ve 2. Yöntem
 <form asp-controller="Products" asp-action="Add" method="post">

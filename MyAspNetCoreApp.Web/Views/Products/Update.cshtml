@@ -3,23 +3,28 @@
 }
 
 
-@model Product
+@model ProductViewModel
 <h1>Ürün Güncelleme</h1>
 
 
-<form asp-controller="Products" asp-action="Update" asp-route-productId="@Model.Id" method="post">
-
+<form asp-controller="Products" asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label for="Name" class="form-label">Ürün ismi :</label>
         <input class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
     <div class="mb-3">
         <label for="Price" class="form-label">Ürün fiyat :</label>
         <input class="form-control" asp-for="Price">
+        <span class="text-danger" asp-validation-for="Price"></span>
+
     </div>
     <div class="mb-3">
         <label for="Stock" class="form-label">Ürün stok :</label>
         <input class="form-control" asp-for="Stock">
+        <span class="text-danger" asp-validation-for="Stock"></span>
+
     </div>
     <div class="mb-3">
         @*<label for="Color" class="form-label">Ürün renk :</label>
@@ -27,8 +32,9 @@
 
         <select asp-for="Color" asp-items="@ViewBag.ColorSelect">
             <option value="@ViewBag.ColorSelect"></option>
-
         </select>
+        <span class="text-danger" asp-validation-for="Color"></span>
+
     </div>
 
     <div class="form-check">
@@ -55,19 +61,29 @@
     <div class="form-floating mb-3">
         <textarea asp-for="Description" class="form-control" placeholder="Ürün Açıklama" style="height: 100px"></textarea>
         <label asp-for="Description">Ürün Açıklama</label>
+        <span class="text-danger" asp-validation-for="Description"></span>
+
     </div>
 
     <div class="mb-3">
         <label asp-for="PublishDate" class="form-label">Ürün Yayınlanma Tarihi :</label>
         <input class="form-control" asp-for="PublishDate">
+        <span class="text-danger" asp-validation-for="PublishDate"></span>
+
     </div>
 
 
 
-    <button class="btn btn-primary" type="submit">Ürün Kaydet</button>
+    <button class="btn btn-primary" type="submit">Ürün Güncelle</button>
 
 
 
 </form>
+
+@section Scripts
+    {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
 
 

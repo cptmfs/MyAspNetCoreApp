@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
 }
 
-@model List<Product>
+@model List<ProductViewModel>
 
 
 
@@ -15,7 +15,7 @@
 
 }
 
-<a asp-controller="products" asp-action="add">Ürün Ekle</a>
+<a class="btn btn-primary" asp-controller="products" asp-action="add">Ürün Ekle</a>
 <table class="table">
     <thead>
         <tr>
@@ -28,6 +28,7 @@
             <th>İndirim Oranı</th>
             <th>Yayınlanma Tarihi</th>
             <th>Ürün Açıklaması</th>
+            <th></th>
             <th>İşlem</th>
 
 
@@ -61,8 +62,11 @@
                 </td>
 
 
-                <td><a asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
-                <a asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+                <td>
+                    <a class="btn btn-danger" asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
                 </td>
 
             </tr>

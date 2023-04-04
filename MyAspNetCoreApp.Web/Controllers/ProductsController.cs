@@ -1,24 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.IdentityModel.Tokens;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
+using MyAspNetCoreApp.Web.ViewModels;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
         private AppDbContext _context;
         private IHelper _helper;
-        public ProductsController(AppDbContext context,IHelper helper
-            )
+        public ProductsController(AppDbContext context, IHelper helper, IMapper mapper)
         {
             // DI Container
             // Dependency Injection Pattern
             _productRepository = new ProductRepository();
             _context = context;
-            _helper= helper;
+            _helper = helper;
+            _mapper = mapper;
 
             //Uygulama her çalıştığında veritabanına yeni kayıt eklememesi için
             //if (!_context.Products.Any()) // Product Tablosunda herhangi bir kayıt varmı ? var ise True döner ve if bloğuna girer. Biz False ise aşağıdaki bloğa girmesini istediğimiz için başına ünlem " ! " koyacağız. Yani Products tablosunda herhangi bir kayıt yoksa aşağıdakileri ekle
@@ -28,12 +32,12 @@ namespace MyAspNetCoreApp.Web.Controllers
             //    _context.Products.Add(new Product { Name = "Iphone 14 Pro Max 1TB", Price = 54000, Stock = 30 , Color = "White"});
             //    _context.SaveChanges();
             //}
-            
+
 
 
             //if (!_productRepository.GetAll().Any()) // Any içerisinde herhangi bi data yoksa aşağıdakileri ekle.. ! ile 
             //{
-                
+
             //}
 
         }
@@ -43,7 +47,7 @@ namespace MyAspNetCoreApp.Web.Controllers
 
             //var products = _productRepository.GetAll();
             var products = _context.Products.ToList();
-            return View(products);
+            return View(_mapper.Map<List<ProductViewModel>>(products));
         }
         public IActionResult Remove(int id)
         {
@@ -57,9 +61,9 @@ namespace MyAspNetCoreApp.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Discount = new Dictionary<string, int>() 
+            ViewBag.Discount = new Dictionary<string, int>()
             {
-                {"%10",10 }, 
+                {"%10",10 },
                 {"%15",15},
                 {"%20",20},
                 {"%30",30 }
@@ -80,13 +84,54 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult Add(Product newProduct) // Tip güvenli sistem.    // 3. YÖNTEM ** Best Practices **
+        public IActionResult Add(ProductViewModel newProduct) // Tip güvenli sistem.    // 3. YÖNTEM ** Best Practices **
         {
-            _context.Products.Add(newProduct);
-            _context.SaveChanges();
-            TempData["status"] = "Ürün Başarıyla Eklendi.";
+            //if (!string.IsNullOrEmpty(newProduct.Name) && newProduct.Name.StartsWith("A")) // eğer ürün adı a ile başlıyorsa
+            //{
+            //    ModelState.AddModelError(String.Empty, "Ürün ismi A ile Başlayamaz"); // ürün ismi A harfi ile baslayamaz.. ve String.Empty ile herhangi bir başlıgın altında paylaşmayacaksak bu hatayı böyle tanımlıyoruz..
+            //}
+            ViewBag.Discount = new Dictionary<string, int>()
+            {
+                {"%10",10 },
+                {"%15",15},
+                {"%20",20},
+                {"%30",30 }
+            };
 
-            return RedirectToAction("Index");
+            ViewBag.ColorSelect = new SelectList(new List<ColorList>()
+            {
+                new() {Data="Kırmızı" , Value="Red"},
+                new() {Data="Mavi" , Value="Blue"},
+                new() {Data="Siyah" , Value="Black"},
+                new() {Data="Beyaz" , Value="White"},
+
+            }, "Value", "Data");
+
+
+
+            if (ModelState.IsValid) // Validasyon başarılı ise aşağıdaki kaydetmeyi yap..
+            {
+                //Modelstate valid geldiyse yani validasyon başarılı ise yinede veritabanına kayıt anında bir hata olusabilir diye try catch bloguyla kontrol edelim.
+                try
+                {
+                    _context.Products.Add(_mapper.Map<Product>(newProduct));
+                    _context.SaveChanges();
+                    TempData["status"] = "Ürün Başarıyla Eklendi.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(string.Empty, "Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz.");
+                    return View();
+                }
+
+
+            }
+            else
+            {
+                return View();
+            }
+
         }
         //[HttpPost]  // 2. YÖNTEM
         //public IActionResult Add(string Name,decimal Price,int Stock,string Color) // Parametre aldığı için method  adını Add yaptık tekrardan. 
@@ -154,19 +199,54 @@ namespace MyAspNetCoreApp.Web.Controllers
                 new() {Data="Siyah" , Value="Black"},
                 new() {Data="Beyaz" , Value="White"},
 
-            }, "Value", "Data",product.Color);
+            }, "Value", "Data", product.Color);
 
-            return View(product);
+            return View(_mapper.Map<ProductViewModel>(product));
         }
         [HttpPost]
-        public IActionResult Update(Product updateProduct,int productId)
+        public IActionResult Update(ProductViewModel updateProduct)
         {
-            updateProduct.Id=productId;
-            _context.Products.Update(updateProduct);
+            if (!ModelState.IsValid)
+            {
+
+                ViewBag.Discount = new Dictionary<string, int>()
+            {
+                {"%10",10 },
+                {"%15",15},
+                {"%20",20},
+                {"%30",30 }
+            };
+                ViewBag.ColorSelect = new SelectList(new List<ColorList>()
+            {
+                new() {Data="Kırmızı" , Value="Red"},
+                new() {Data="Mavi" , Value="Blue"},
+                new() {Data="Siyah" , Value="Black"},
+                new() {Data="Beyaz" , Value="White"},
+
+            }, "Value", "Data", updateProduct.Color);
+
+                return View();
+            }
+            _context.Products.Update(_mapper.Map<Product>(updateProduct));
             _context.SaveChanges();
             TempData["status"] = "Ürün Başarıyla Güncellendi.";
-           
+
             return RedirectToAction("Index");
+        }
+        [AcceptVerbs("GET","POST")] // Hem get hem post olabilir..
+        public IActionResult HasProductName(string Name)
+        {
+            var anyProduct = _context.Products.Any(x => x.Name.ToLower() == Name.ToLower());
+            if (anyProduct) // anyProduct True geldiyse ..
+            {
+                return Json("Kaydetmeye çalıştığınızÜrün ismi veritabanında bulunmaktadır..");
+            }
+            else
+            {
+                return Json(true); // validasyondan geçti demek için true.
+            }
+
+
         }
     }
 }
