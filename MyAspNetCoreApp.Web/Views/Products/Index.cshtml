@@ -15,8 +15,8 @@
 
 }
 
-<a class="btn btn-primary" asp-controller="products" asp-action="add">Ürün Ekle</a>
-<table class="table">
+<a class="btn btn-outline-primary" asp-controller="products" asp-action="add">Ürün Ekle</a>
+<table id="table1" class="table">
     <thead>
         <tr>
             <th>Id</th>
@@ -24,14 +24,13 @@
             <th>Fiyat</th>
             <th>Stok</th>
             <th>Color</th>
-            <th>Yayınlansın mı ?</th>
+            <th width="150px">Yayınlansın mı?</th>
+            <th></th>
             <th>İndirim Oranı</th>
             <th>Yayınlanma Tarihi</th>
             <th>Ürün Açıklaması</th>
-            <th></th>
-            <th>İşlem</th>
-
-
+            <th width="75px"></th>
+            <th width="150px">İşlem</th>
         </tr>
 
     </thead>
@@ -44,10 +43,11 @@
                 <td>@item.Price</td>
                 <td>@item.Stock</td>
                 <td>@item.Color</td>
-                <td>
+                <td style="text-align:center">
                     @(item.IsPublish ? "Evet" : "Hayır")
 
                 </td>
+                <td></td>
                 <td>@item.Discount</td>
                 <td>@item.PublishDate</td>
                 <td>
@@ -60,13 +60,11 @@
                         @item.Description
                     }
                 </td>
-
-
+                <td></td>
                 <td>
-                    <a class="btn btn-danger" asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
-                </td>
-                <td>
-                    <a class="btn btn-success" asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+                    <a class="btn btn-outline-danger" asp-asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                               
+                    <a class="btn btn-outline-success" asp-asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
                 </td>
 
             </tr>

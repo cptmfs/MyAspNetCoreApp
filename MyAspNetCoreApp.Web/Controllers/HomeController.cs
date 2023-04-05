@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
+using MyAspNetCoreApp.Web.ViewModels;
 using System.Diagnostics;
 
 namespace MyAspNetCoreApp.Web.Controllers
@@ -9,14 +10,29 @@ namespace MyAspNetCoreApp.Web.Controllers
     {
         Helper _helper;
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            var products = _context.Products.OrderByDescending(p => p.Id).Select(x=> new ProductPartialViewModel()
+            {
+                Id=x.Id,
+                Name=x.Name,
+                Price=x.Price,
+                Stock=x.Stock
+            }).ToList();
+
+            ViewBag.ProductListPartialViewModel = new ProductListPartialViewModel()
+            {
+                Products = products
+            };
+
             return View();
         }
 

@@ -16,7 +16,8 @@ html {
 body {
     margin-bottom: 60px;
 }
-.table
+#table1
 {
     background-color:aliceblue;
+    text-align:center;
 }

@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
     //var alert = "Bu bir Alıştırma Sayfasıdır.";
 }
+
+@model ProductListPartialViewModel
 @section Css{
     <link href="~/css/example.css" rel="stylesheet" />
     <style>
@@ -31,3 +33,8 @@
 @await Html.PartialAsync("_MenuPartialView")
 @Html.Partial("_MenuPartialView")
 *@
+<div class="row">
+    <div class="col-md-4">
+        <partial name="~/PartialViews/_ProductListPartialView.cshtml" model="@ViewBag.ProductListPartialViewModel" />
+    </div>
+</div>
