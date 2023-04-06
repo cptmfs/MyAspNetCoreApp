@@ -1,0 +1,37 @@
+﻿@{
+
+}
+
+@section Css{
+    <link href="~/css/example.css" rel="stylesheet" />
+    <style>
+        h1 {
+            color: brown;
+            background-color: beige;
+        }
+    </style>
+
+}
+
+
+<h1 style="text-align:center">Öğrenci Listesi</h1>
+<hr />
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["status"]
+    </div>
+
+}
+
+<a class="btn btn-outline-primary" asp-controller="student" asp-action="add">Öğrenci Kayıt</a>
+
+
+<div class="row">
+    <div class="col-md-6">
+       <vc:student></vc:student>
+    </div>
+</div>
+
+
+

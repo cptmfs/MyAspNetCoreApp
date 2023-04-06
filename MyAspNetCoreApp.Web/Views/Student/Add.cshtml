@@ -1,0 +1,33 @@
+﻿
+@model StudentViewModel
+<h1>Öğrenci Kayıt</h1>
+
+<form>
+  <div class="mb-3">
+    <label asp-for="FirstName" class="form-label">Adı :</label>
+    <input class="form-control" asp-for="FirstName">
+  </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Soyadı :</label>
+        <input class="form-control" asp-for="LastName">
+    </div>
+    <div class="mb-3">
+        <label asp-for="DateOfBirth" class="form-label">Doğum Tarihi :</label>
+        <input class="form-control" asp-for="DateOfBirth">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Ünvanı :</label>
+        <input class="form-control" asp-for="Title">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Experiences" class="form-label">Deneyimler :</label>
+        <input class="form-control" asp-for="Experiences">
+    </div>
+      <div class="mb-3">
+        <label asp-for="Skills" class="form-label">Yetenekler :</label>
+        <input class="form-control" asp-for="Skills">
+    </div>
+  
+  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+
