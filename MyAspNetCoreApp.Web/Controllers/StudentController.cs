@@ -20,7 +20,11 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Add(StudentViewModel studentViewModel)
         {
