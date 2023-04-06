@@ -1,18 +1,4 @@
-﻿@{
-
-}
-
-@section Css{
-    <link href="~/css/example.css" rel="stylesheet" />
-    <style>
-        h1 {
-            color: brown;
-            background-color: beige;
-        }
-    </style>
-
-}
-
+﻿@model List<StudentViewModel>
 
 <h1 style="text-align:center">Öğrenci Listesi</h1>
 <hr />
@@ -21,10 +7,9 @@
     <div class="alert alert-success" role="alert">
         @TempData["status"]
     </div>
-
 }
 
-<a class="btn btn-outline-primary" asp-controller="student" asp-action="add">Öğrenci Kayıt</a>
+<a class="btn btn-outline-primary  mb-2" asp-controller="student" asp-action="add">Öğrenci Kayıt</a>
 
 
 <div class="row">

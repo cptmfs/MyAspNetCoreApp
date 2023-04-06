@@ -18,7 +18,8 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var students = _context.Students.ToList();
+            return View(_mapper.Map<List<StudentViewModel>>(students));
         }
         [HttpGet]
         public IActionResult Add()
@@ -30,7 +31,38 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             _context.Students.Add(_mapper.Map<Student>(studentViewModel));
             _context.SaveChanges();
-            TempData["status"] = "Ürün Başarıyla Eklendi.";
+            TempData["status"] = "Öğrenci Bilgileri Başarıyla Eklendi.";
+            return RedirectToAction("Index");
+        }
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult List(int id)
+        {
+            var student = _context.Students.Find(id);
+            _context.Students.Where(x => x.Id ==student.Id).ToList();
+            return View(_mapper.Map<StudentViewModel>(student));
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var student = _context.Students.Find(id);
+
+            return View(_mapper.Map<StudentViewModel>(student));
+        }
+        [HttpPost]
+
+        public IActionResult Update(StudentViewModel studentViewModel)
+        {
+            _context.Update(_mapper.Map<Student>(studentViewModel));
+            _context.SaveChanges();
+            TempData["status"] = "Öğrenci Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("Index");
+        }
+        public IActionResult Remove(int id)
+        {
+            var student = _context.Students.Find(id);
+            _context.Students.Remove(student);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

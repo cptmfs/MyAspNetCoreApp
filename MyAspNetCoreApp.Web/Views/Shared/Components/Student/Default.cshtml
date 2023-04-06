@@ -1,11 +1,12 @@
 ﻿@model List<StudentViewModel>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" style="text-align:center">
     <thead>
         <tr>
             <th>Id</th>
             <th>Adı</th>
             <th>Soyadı</th>
+            <th>İşlem</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,14 @@
                 <td>@item.Id</td>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-asp-controller="student" asp-action="list" asp-route-id="@item.Id">Listele</a>
+
+                    <a class="btn btn-outline-success" asp-asp-controller="student" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+
+                    <a class="btn btn-outline-danger" asp-asp-controller="student" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+
+                </td>
             </tr>
         }
 

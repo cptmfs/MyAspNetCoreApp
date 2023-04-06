@@ -1,12 +1,15 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Update";
+}
 @model StudentViewModel
-<h1>Öğrenci Kayıt</h1>
+<h1>Öğrenci Bilgi Güncelleme</h1>
 
-<form asp-controller="Student" asp-action="Add" method="post">
-  <div class="mb-3">
-    <label asp-for="FirstName" class="form-label">Adı :</label>
-    <input class="form-control" asp-for="FirstName">
-  </div>
+<form asp-controller="Student" asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">Adı :</label>
+        <input class="form-control" asp-for="FirstName">
+    </div>
     <div class="mb-3">
         <label asp-for="LastName" class="form-label">Soyadı :</label>
         <input class="form-control" asp-for="LastName">
@@ -23,11 +26,11 @@
         <label asp-for="Experiences" class="form-label">Deneyimler :</label>
         <input class="form-control" asp-for="Experiences">
     </div>
-      <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="Skills" class="form-label">Yetenekler :</label>
         <input class="form-control" asp-for="Skills">
     </div>
-  
-  <button type="submit" class="btn btn-primary">Kaydet</button>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
 </form>
 
