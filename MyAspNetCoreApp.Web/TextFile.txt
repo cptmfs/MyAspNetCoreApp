@@ -108,4 +108,8 @@ SONUÇ : Model Binding'de Kullanıcıdan Data Alırken En iyisi HTTP POST ve Tip
                 {"%30",30 }
             };
 
-    Sonra bunu kullanırken foreach de döndürdüğümüzde var item olsun .. String değeri kullanırken @item.Key   value değeri içinse @item.Value seçiyoruz..
+    Sonra bunu kullanırken foreach de döndürdüğümüzde var item olsun ..
+    String değeri kullanırken @item.Key   value değeri içinse @item.Value seçiyoruz..
+
+
+              --         Custom Tag Helper         --

@@ -1,28 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     //var alert = "Bu bir Alıştırma Sayfasıdır.";
+
+    var product = new Product() { Id = 53, Name = "Samsung S7 Edge", Price = 5600, Stock = 12 };
 }
 
 @model ProductListPartialViewModel
 @section Css{
     <link href="~/css/example.css" rel="stylesheet" />
     <style>
-        h1 
-        {
-            color:brown;
-            background-color:beige;
+        h1 {
+            color: brown;
+            background-color: beige;
         }
     </style>
-    
+
 }
 @section Scripts
-{
+    {
     <script type="text/javascript">
         //alert("Sayfamıza hoş geldin")
-        $(document).ready(function(){
+        $(document).ready(function () {
             console.log("Sayfamıza hoş geldiniz");
-        }) 
-         </script>
+        })
+    </script>
 
 }
 <h1>Ferit Kaptan Web Page</h1>
@@ -37,4 +38,24 @@
     <div class="col-md-4">
         <partial name="~/PartialViews/_ProductListPartialView.cshtml" model="@ViewBag.ProductListPartialViewModel" />
     </div>
+    <div class="col-md-4">
+    @*@await Component.InvokeAsync("ProductList",new{type=1})*@
+    <vc:product-list type=1></vc:product-list>
+    
+    </div>
+
+    <div class="col-md-4">
+        <italic>Asp.Net Core</italic>
+        <product-show product="@product"></product-show>
+
+
+        
+    </div>
+    <div>
+        <img src="/images/1.png" />
+        <thumbnail image-src="/images/1.png"></thumbnail>
+    </div>
 </div>
+
+
+

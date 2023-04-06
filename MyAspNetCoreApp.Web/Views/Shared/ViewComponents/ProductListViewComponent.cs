@@ -4,6 +4,7 @@ using MyAspNetCoreApp.Web.ViewModels;
 
 namespace MyAspNetCoreApp.Web.Views.Shared.ViewComponents
 {
+    //[ViewComponent(Name ="pList")]  // Component tag helper ismi değiştirmek istediğimizde kullanılır..
     public class ProductListViewComponent:ViewComponent
     {
         private readonly AppDbContext _context;
@@ -13,15 +14,23 @@ namespace MyAspNetCoreApp.Web.Views.Shared.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int type=1)
         {
             var viewModel = _context.Products.Select(x => new ProductListComponentViewModel()
             {
                 Name = x.Name,
                 Description=x.Description
             }).ToList();
+            if (type==1)
+            {
+                return View("Default",viewModel);
 
-            return View(viewModel);
+            }
+            else
+            {
+                return View("Type2", viewModel);
+
+            }
         }
 
     }

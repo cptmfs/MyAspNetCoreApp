@@ -12,5 +12,6 @@ namespace MyAspNetCoreApp.Web.Models
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet <Visitor> Visitors { get; set; }
     }
 }
