@@ -17,11 +17,11 @@
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
                 <td>
-                    <a class="btn btn-outline-primary" asp-asp-controller="student" asp-action="list" asp-route-id="@item.Id">Listele</a>
+                    <a class="btn btn-outline-primary" asp-controller="student" asp-action="list" asp-route-id="@item.Id">Listele</a>
 
-                    <a class="btn btn-outline-success" asp-asp-controller="student" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+                    <a class="btn btn-outline-success" asp-controller="student" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
 
-                    <a class="btn btn-outline-danger" asp-asp-controller="student" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                    <a class="btn btn-outline-danger" asp-controller="student" asp-action="remove" asp-route-id="@item.Id">Sil</a>
 
                 </td>
             </tr>

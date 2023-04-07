@@ -1,21 +1,13 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿
+@{
+    ViewData["Title"] = "Pages";
 }
-
 @model List<ProductViewModel>
+<h1>Pages</h1>
+<h2>page : @ViewBag.page</h2>
+<h2>pageSize : @ViewBag.pageSize</h2>
 
 
-
-<h1>Ürünler</h1>
-@if (TempData["status"] != null)
-{
-    <div class="alert alert-success" role="alert">
-       @TempData["status"]
-    </div>
-
-}
-
-<a class="btn btn-outline-primary" asp-controller="products" asp-action="add">Ürün Ekle</a>
 <table id="table1" class="table">
     <thead>
         <tr>
@@ -51,9 +43,11 @@
                 <td>@item.Discount</td>
                 <td>@item.PublishDate</td>
                 <td>
-                    @if (item.Description.Length>20)
+                    @if (item.Description.Length > 20)
                     {
-                        @item.Description.Substring(0,20)<text>...</text>
+                        @item.Description.Substring(0,20)
+
+                        <text>...</text>
                     }
                     else
                     {
@@ -63,10 +57,10 @@
                 <td></td>
                 <td>
                     <a class="btn btn-outline-danger" asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
-                               
+
                     <a class="btn btn-outline-success" asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
-                    <a class="btn btn-outline-primary"  asp-controller="products" asp-action="getbyid" asp-route-productid="@item.Id">Git</a>
-                    
+                    <a class="btn btn-outline-primary" asp-controller="products" asp-action="getbyid" asp-route-productid="@item.Id">Git</a>
+
                 </td>
 
             </tr>
@@ -74,7 +68,4 @@
     </tbody>
 
 </table>
-<a class="btn btn-outline-primary" asp-controller="Blog" asp-action="article" asp-route-name="makale-ismi" asp-route-id="2">makaleye git</a>
-<a class="btn btn-outline-primary" asp-controller="products" asp-action="pages" asp-route-page="1" asp-route-pagesize="3">1 sayfadan 3 ürün ver</a>
-<a class="btn btn-outline-primary" asp-controller="products" asp-action="pages" asp-route-page="2" asp-route-pagesize="3">2 sayfadan 3 ürün ver</a>
 

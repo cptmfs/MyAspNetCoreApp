@@ -45,9 +45,33 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Index()
         {
 
+
             //var products = _productRepository.GetAll();
             var products = _context.Products.ToList();
             return View(_mapper.Map<List<ProductViewModel>>(products));
+        }
+
+        public IActionResult Pages(int page, int pageSize)
+        {
+            //page=1 pagesize=3 => ilk 3 kayıt
+            //page=2 pagesize=3 => ikinci 3 kayıt
+            var products = _context.Products.Skip((page - 1) * pageSize).Take(pageSize).ToList(); //Skip 0 yazınca ilk 3(istediğimiz rakam) kaydı alır eğer 1 yazarsak 1 kayıt atlar sonraki kayıtları alır
+
+
+
+
+            ViewBag.page=page;
+            ViewBag.pageSize=pageSize;
+
+
+            return View(_mapper.Map<List<ProductViewModel>>(products));
+        }
+
+        public IActionResult GetById(int productId)
+        {
+            var products = _context.Products.Find(productId);
+
+            return View(_mapper.Map<ProductViewModel>(products));
         }
         public IActionResult Remove(int id)
         {

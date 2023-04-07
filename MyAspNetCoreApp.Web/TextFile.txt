@@ -113,3 +113,16 @@ SONUÇ : Model Binding'de Kullanıcıdan Data Alırken En iyisi HTTP POST ve Tip
 
 
               --         Custom Tag Helper         --
+
+
+              --         ROUTING         --
+
+Methodlarımız Custom bir parametre alıyorsa program.cs de  aşağıdaki örneklerdeki  gibi bir routing tanımlama yapmamız gerekmektedir..
+
+app.MapControllerRoute(
+    name: "productpages",
+    pattern: "{controller=products}/{action=pages}/{page}/{pagesize}");
+
+app.MapControllerRoute(
+    name: "productgetbyid",
+    pattern: "{controller=products}/{action=getbyid}/{productid}");

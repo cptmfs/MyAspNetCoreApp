@@ -39,7 +39,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult List(int id)
         {
             var student = _context.Students.Find(id);
-            _context.Students.Where(x => x.Id == student.Id).ToList();
+            //_context.Students.Where(x => x.Id == student.Id).ToList();
             ViewBag.StudentNo = student.Id;
             return View(_mapper.Map<StudentViewModel>(student));
         }
