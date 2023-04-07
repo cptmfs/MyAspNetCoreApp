@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyAspNetCoreApp.Web.Models;
 using MyAspNetCoreApp.Web.ViewModels;
+using MyAspNetCoreApp.Web.Views.Shared.ViewComponents;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
@@ -38,7 +39,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult List(int id)
         {
             var student = _context.Students.Find(id);
-            _context.Students.Where(x => x.Id ==student.Id).ToList();
+            _context.Students.Where(x => x.Id == student.Id).ToList();
             return View(_mapper.Map<StudentViewModel>(student));
         }
 
