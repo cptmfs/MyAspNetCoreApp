@@ -1,42 +1,12 @@
 ﻿@model List<StudentViewModel>
 
-@*<table class="table table-striped table-hover" style="text-align:center">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Adı</th>
-            <th>Soyadı</th>
-            <th>Doğum Tarihi</th>
-            <th>Doğum Yeri</th>
-            <th>Ünvan</th>
-            <th>Deneyimler</th>
-            <th>Yetenekler</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
-                <td>@item.DateOfBirth</td>
-                <td>@item.PlaceOfBirth</td>
-                <td>@item.Title</td>
-                <td>@item.Experiences</td>
-                <td>@item.Skills</td>
-            </tr>
-        }
-    </tbody>
-</table>*@
-
 <div class="container pb-5 mb-3 ">
 
     <div class="row mt-2">
         <div class="col-md-12">
             @foreach (var item in Model)
             {
-                <b><font size="50" face="Verdana"><h1 style="text-align:center">@item.FirstName @item.LastName</h1></font></b>
+                <b><font size="50" face="Verdana"><h1 style="text-align:center">@item.FirstName+@item.LastName</h1></font></b>
             }
 
         </div>
@@ -65,7 +35,11 @@
                     </svg>
                     <a href="@item.Twitter" target="_blank" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Twitter</a>
                 </p>
-            }           
+
+
+            }
+
+            
         </div>
     </div>
     <div class="row mt-3 mt-5">

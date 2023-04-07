@@ -1,19 +1,38 @@
-﻿
-@model StudentViewModel
+﻿@model StudentViewModel
 <h1>Öğrenci Kayıt</h1>
 
 <form asp-controller="Student" asp-action="Add" method="post">
-  <div class="mb-3">
-    <label asp-for="FirstName" class="form-label">Adı :</label>
-    <input class="form-control" asp-for="FirstName">
-  </div>
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">Adı :</label>
+        <input class="form-control" asp-for="FirstName">
+    </div>
     <div class="mb-3">
         <label asp-for="LastName" class="form-label">Soyadı :</label>
         <input class="form-control" asp-for="LastName">
     </div>
     <div class="mb-3">
+        <label asp-for="Image" class="form-label">Resim Linki :</label>
+        <input class="form-control" asp-for="Image">
+    </div>
+    <div class="mb-3">
+        <label asp-for="LinkedIn" class="form-label">LınkedIn Linki :</label>
+        <input class="form-control" asp-for="LinkedIn">
+    </div>
+    <div class="mb-3">
+        <label asp-for="GitHub" class="form-label">GitHub Linki :</label>
+        <input class="form-control" asp-for="GitHub">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Twitter" class="form-label">Twitter Linki :</label>
+        <input class="form-control" asp-for="Twitter">
+    </div>
+    <div class="mb-3">
         <label asp-for="DateOfBirth" class="form-label">Doğum Tarihi :</label>
         <input class="form-control" asp-for="DateOfBirth">
+    </div>
+    <div class="mb-3">
+        <label asp-for="PlaceOfBirth" class="form-label">Doğum Yeri :</label>
+        <input class="form-control" asp-for="PlaceOfBirth">
     </div>
     <div class="mb-3">
         <label asp-for="Title" class="form-label">Ünvanı :</label>
@@ -23,11 +42,11 @@
         <label asp-for="Experiences" class="form-label">Deneyimler :</label>
         <input class="form-control" asp-for="Experiences">
     </div>
-      <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="Skills" class="form-label">Yetenekler :</label>
         <input class="form-control" asp-for="Skills">
     </div>
-  
-  <button type="submit" class="btn btn-primary">Kaydet</button>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
 
