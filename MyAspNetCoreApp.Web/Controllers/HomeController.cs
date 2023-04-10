@@ -7,9 +7,9 @@ using System.Diagnostics;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
+    //[Route("[controller]/[action]")] Hybrid kullanım yaptıgımız icin kapatıldı.
     public class HomeController : Controller
     {
-        Helper _helper;
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -20,7 +20,9 @@ namespace MyAspNetCoreApp.Web.Controllers
             _context = context;
             _mapper = mapper;
         }
-
+        //[Route("")]
+        //[Route("Home")]
+        //[Route("Home/Index")]  Hybrid kullanım yaptıgımız icin kapatıldı.
         public IActionResult Index()
         {
             var products = _context.Products.OrderByDescending(p => p.Id).Select(x=> new ProductPartialViewModel()

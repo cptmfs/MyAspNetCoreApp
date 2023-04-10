@@ -8,6 +8,7 @@ using MyAspNetCoreApp.Web.ViewModels;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
+    //[Route("[controller]/[action]")] Hybrid kullanım yaptıgımız icin kapatıldı.
     public class ProductsController : Controller
     {
         private readonly ProductRepository _productRepository;
@@ -50,7 +51,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             var products = _context.Products.ToList();
             return View(_mapper.Map<List<ProductViewModel>>(products));
         }
-
+        [Route("[controller]/[action]/{page}/{pageSize}",Name ="productPage")]
         public IActionResult Pages(int page, int pageSize)
         {
             //page=1 pagesize=3 => ilk 3 kayıt
@@ -66,6 +67,7 @@ namespace MyAspNetCoreApp.Web.Controllers
 
             return View(_mapper.Map<List<ProductViewModel>>(products));
         }
+        [Route("[action]/{productId}")]
 
         public IActionResult GetById(int productId)
         {

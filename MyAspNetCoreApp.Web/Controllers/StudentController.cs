@@ -6,6 +6,7 @@ using MyAspNetCoreApp.Web.Views.Shared.ViewComponents;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
+    //[Route("[controller]/[action]")] Hybrid kullanım yaptıgımız icin kapatıldı.
     public class StudentController : Controller
     {
         private AppDbContext _context;
