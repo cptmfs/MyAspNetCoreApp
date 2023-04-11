@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Tokens;
+using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
 using MyAspNetCoreApp.Web.ViewModels;
@@ -68,13 +69,14 @@ namespace MyAspNetCoreApp.Web.Controllers
             return View(_mapper.Map<List<ProductViewModel>>(products));
         }
         [Route("[action]/{productId}")]
-
+        [ServiceFilter(typeof(NotFoundFilter))] //NotFoundFilter constructor içinde parametre aldıgı için (AppDbContext) onu normal filtre gibi tanımlayamıyoruz. ServiceFilter olarak yapmamız gerekiyor. 
         public IActionResult GetById(int productId)
         {
             var products = _context.Products.Find(productId);
 
             return View(_mapper.Map<ProductViewModel>(products));
         }
+        [ServiceFilter(typeof(NotFoundFilter))]
         public IActionResult Remove(int id)
         {
             //_productRepository.Remove(id);
@@ -206,6 +208,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         //    _context.SaveChanges();
         //    return RedirectToAction("Index");
         //}
+        [ServiceFilter(typeof(NotFoundFilter))]
         [HttpGet]
         public IActionResult Update(int id)
         {

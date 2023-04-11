@@ -1,5 +1,6 @@
-using Microsoft.Data.SqlClient;
+ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
 using System.Reflection;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>  //DBContext ekle <AppDbC
 builder.Services.AddScoped<IHelper, Helper>(); //Bir singleton ( bir kez üret ) nesne ekleyeceksin,  herhangi bir class'ýn constructor veya methodunda IHelper görürsen , Helper sýnýfýndan bir nesne üret // Scope Çevirdik..
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Çalýþmýþ oldugum assembly'i ver.
+
+builder.Services.AddScoped<NotFoundFilter>(); //Scope request response dönüsünceye kadar ayný örnegi verir. Filterlardak istek gelince calýstýgý için scope uygun oldu.
 
 var app = builder.Build();
 
@@ -59,7 +62,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //app.MapControllers(); 
-
-
 
 app.Run();

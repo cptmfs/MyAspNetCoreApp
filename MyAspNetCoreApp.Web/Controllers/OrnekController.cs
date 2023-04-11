@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Models;
 
 namespace MyAspNetCoreApp.Web.Controllers
@@ -14,6 +15,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             public string ChildPng { get; set; }
         }
+        [CustomResultFilter("cptmfs","v_CustomResulFilter")]
         public IActionResult Index()
         {
             //ViewBag.name = "Asp.Net Core"; // Taşınacak datayı indexde @ViewBag.name diye çağırabiliyoruz.. 
