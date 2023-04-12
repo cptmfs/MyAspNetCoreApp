@@ -39,12 +39,12 @@ namespace MyAspNetCoreApp.Web.Controllers
             {
                 Products = products
             };
-
             return View();
         }
-
+        [CustomExceptionFilter]
         public IActionResult Privacy()
         {
+            throw new Exception("Veritabanı ile ilgili bir hata meydana geldi");
             return View();
         }
 
