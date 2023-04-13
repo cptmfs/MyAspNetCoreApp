@@ -29,9 +29,10 @@
         }
     </tbody>
 </table>*@
-<body style="background-color:antiquewhite">
-<div class="container pb-5 mb-3">
 
+<body style="background-color:antiquewhite">
+
+<div class="container pb-5 mb-3">
     <div class="row mt-2">
         <div class="col-md-12">
             @foreach (var item in Model)
@@ -124,6 +125,11 @@
                 </tr>
                 }
             </table>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+                <button type="button" id="btnPrint" class="btn btn-primary btn-sm mar-top pull-right" onclick="window.print()"><i class="fa fa-print"></i>Cv yi Yazdır</button>
         </div>
     </div>
 
