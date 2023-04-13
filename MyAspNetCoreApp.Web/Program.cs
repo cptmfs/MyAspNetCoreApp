@@ -1,5 +1,6 @@
  using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>  //DBContext ekle <AppDbC
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon")); // SqlServer kullan , builder'ýn configration dediðimiz "appsettings.json" içerisindeki configrationlarý okur. .GetConnectionString ile oradaki Connection String'i al dedik ? hangisini ? ("SqlCon") parantez içerisinde connectionString'e verdiðimiz ismi belirttik..
 });
 
+//IFileProvider dosya upload için kullanýyoruz. bizden somut bir sýnýf istiyor bunun için PhysicalFileProvider ' ý newliyoruz ve oda bir root istiyor. Onun içinde Directroy.GetCurrentDirectory diyerek çalýþmýþ olduðum proje demiþ oluyoruz.
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 builder.Services.AddScoped<IHelper, Helper>(); //Bir singleton ( bir kez üret ) nesne ekleyeceksin,  herhangi bir class'ýn constructor veya methodunda IHelper görürsen , Helper sýnýfýndan bir nesne üret // Scope Çevirdik..
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Çalýþmýþ oldugum assembly'i ver.

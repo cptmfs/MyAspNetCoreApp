@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
@@ -14,10 +15,10 @@ namespace MyAspNetCoreApp.Web.Controllers
     {
         private readonly ProductRepository _productRepository;
         private readonly IMapper _mapper;
-
+        private readonly IFileProvider _fileProvider;
         private AppDbContext _context;
         private IHelper _helper;
-        public ProductsController(AppDbContext context, IHelper helper, IMapper mapper)
+        public ProductsController(AppDbContext context, IHelper helper, IMapper mapper, IFileProvider fileProvider)
         {
             // DI Container
             // Dependency Injection Pattern
@@ -25,6 +26,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             _context = context;
             _helper = helper;
             _mapper = mapper;
+            _fileProvider = fileProvider;
 
             //Uygulama her çalıştığında veritabanına yeni kayıt eklememesi için
             //if (!_context.Products.Any()) // Product Tablosunda herhangi bir kayıt varmı ? var ise True döner ve if bloğuna girer. Biz False ise aşağıdaki bloğa girmesini istediğimiz için başına ünlem " ! " koyacağız. Yani Products tablosunda herhangi bir kayıt yoksa aşağıdakileri ekle
