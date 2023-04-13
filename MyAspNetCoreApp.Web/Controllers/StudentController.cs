@@ -31,10 +31,28 @@ namespace MyAspNetCoreApp.Web.Controllers
         [HttpPost]
         public IActionResult Add(StudentViewModel studentViewModel)
         {
-            _context.Students.Add(_mapper.Map<Student>(studentViewModel));
-            _context.SaveChanges();
-            TempData["status"] = "Öğrenci Bilgileri Başarıyla Eklendi.";
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Students.Add(_mapper.Map<Student>(studentViewModel));
+                    _context.SaveChanges();
+                    TempData["status"] = "Öğrenci Bilgileri Başarıyla Eklendi.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(string.Empty, "Öğrenci kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz.");
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+
+            }
+
+
         }
         [AcceptVerbs("GET", "POST")]
         public IActionResult List(int id)
