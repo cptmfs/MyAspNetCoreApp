@@ -114,12 +114,52 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult Add(ProductViewModel newProduct) // Tip güvenli sistem.    // 3. YÖNTEM ** Best Practices **
+        public  IActionResult Add(ProductViewModel newProduct) // Tip güvenli sistem.    // 3. YÖNTEM ** Best Practices **
         {
             //if (!string.IsNullOrEmpty(newProduct.Name) && newProduct.Name.StartsWith("A")) // eğer ürün adı a ile başlıyorsa
             //{
             //    ModelState.AddModelError(String.Empty, "Ürün ismi A ile Başlayamaz"); // ürün ismi A harfi ile baslayamaz.. ve String.Empty ile herhangi bir başlıgın altında paylaşmayacaksak bu hatayı böyle tanımlıyoruz..
             //}
+
+            IActionResult result = null;
+
+
+
+            if (ModelState.IsValid) // Validasyon başarılı ise aşağıdaki kaydetmeyi yap..
+            {
+                //Modelstate valid geldiyse yani validasyon başarılı ise yinede veritabanına kayıt anında bir hata olusabilir diye try catch bloguyla kontrol edelim.
+                try
+                {
+                    var root = _fileProvider.GetDirectoryContents("wwwroot"); // Projenin kök klasörünü verir bu "" boş tırnak ile.
+                    var images = root.First(x => x.Name == "images"); //wwwroot klasöründeki adı images olanı al .
+
+                    var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName); 
+                    // GetExtension verilen dosyanın uzantısını alır. " nokta Jpg gibi "
+                    //
+
+                    var path = Path.Combine(images.PhysicalPath,randomImageName);//images klasörünün fiziksel yolunu al ( C:/Kaptan/github..vs gibi) birde newProduct'ın Image'inin dosya adını al.
+
+                    using var stream = new FileStream(path, FileMode.Create); //kaydetmek için stream oluşturmak zorunlu. path = kaydet , den sonra FileMode.Create = eğer yoksa oluştur.
+
+                      newProduct.Image.CopyTo(stream); // resmi wwwroot images'e kaydettik.
+                    var product = _mapper.Map<Product>(newProduct); // maplemeyii yaptık
+                    product.ImagePath = randomImageName; // maplenmiş product'ın imagepath'ine upload edilen resmin dosya adını verdik.
+                    _context.Products.Add(product); // ve bunu veritabanına ekledik..
+                    _context.SaveChanges();
+                    TempData["status"] = "Ürün Başarıyla Eklendi.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(string.Empty, "Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz.");
+                 
+                    result= View();
+                }
+            }
+            else
+            {               
+                result= View();
+            }
             ViewBag.Discount = new Dictionary<string, int>()
             {
                 {"%10",10 },
@@ -136,31 +176,7 @@ namespace MyAspNetCoreApp.Web.Controllers
                 new() {Data="Beyaz" , Value="White"},
 
             }, "Value", "Data");
-
-
-
-            if (ModelState.IsValid) // Validasyon başarılı ise aşağıdaki kaydetmeyi yap..
-            {
-                //Modelstate valid geldiyse yani validasyon başarılı ise yinede veritabanına kayıt anında bir hata olusabilir diye try catch bloguyla kontrol edelim.
-                try
-                {
-                    _context.Products.Add(_mapper.Map<Product>(newProduct));
-                    _context.SaveChanges();
-                    TempData["status"] = "Ürün Başarıyla Eklendi.";
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    ModelState.AddModelError(string.Empty, "Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz.");
-                    return View();
-                }
-
-
-            }
-            else
-            {
-                return View();
-            }
+            return result;
 
         }
         //[HttpPost]  // 2. YÖNTEM

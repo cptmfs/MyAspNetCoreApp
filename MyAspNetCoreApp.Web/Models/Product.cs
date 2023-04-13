@@ -11,5 +11,6 @@
         public DateTime? PublishDate { get; set; }   
         public bool IsPublish { get; set; }
         public int Discount { get; set; }
+        public string ImagePath { get; set; }
     }
 }

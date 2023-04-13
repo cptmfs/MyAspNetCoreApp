@@ -1,4 +1,5 @@
-﻿@model StudentViewModel
+﻿@using MyAspNetCoreApp.Web.ViewModels;
+@model StudentViewModel
 <h1>Öğrenci Kayıt</h1>
 <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
 
@@ -17,7 +18,7 @@
     <div class="mb-3">
         <label asp-for="Image" class="form-label">Resim Linki :</label>
         <input class="form-control" asp-for="Image">
-                <span class="alert alert-danger" asp-validation-for="Image"></span>
+        <span class="alert alert-danger" asp-validation-for="Image"></span>
 
     </div>
     <div class="mb-3">
@@ -35,9 +36,9 @@
         <input class="form-control" asp-for="Twitter">
     </div>
     <div class="mb-3">
-        <label  asp-for="DateOfBirth" class="form-label">Doğum Tarihi :</label>
+        <label asp-for="DateOfBirth" class="form-label">Doğum Tarihi :</label>
         <input type="date" class="form-control" asp-for="DateOfBirth">
-                <span class="alert alert-danger" asp-validation-for="DateOfBirth"></span>
+        <span class="alert alert-danger" asp-validation-for="DateOfBirth"></span>
 
     </div>
     <div class="mb-3">

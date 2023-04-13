@@ -10,7 +10,7 @@
 @if (TempData["status"] != null)
 {
     <div class="alert alert-success" role="alert">
-       @TempData["status"]
+        @TempData["status"]
     </div>
 
 }
@@ -20,6 +20,7 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Resim</th>
             <th>İsim</th>
             <th>Fiyat</th>
             <th>Stok</th>
@@ -37,8 +38,19 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <td>@item.Id</td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img style="width:100px;" height="100px" ; src="~/images/@item.ImagePath">
+                    }
+                    else
+                    {
+                        <img style="width:100px;" height="100px" ; src="~/images/noimage-300x225.jpg">
+
+                    }
+                </td>
                 <td>@item.Name</td>
                 <td>@item.Price</td>
                 <td>@item.Stock</td>
@@ -51,9 +63,11 @@
                 <td>@item.Discount</td>
                 <td>@item.PublishDate</td>
                 <td>
-                    @if (item.Description.Length>20)
+                    @if (item.Description.Length > 20)
                     {
-                        @item.Description.Substring(0,20)<text>...</text>
+                        @item.Description.Substring(0,20)
+
+                        <text>...</text>
                     }
                     else
                     {
@@ -63,10 +77,10 @@
                 <td></td>
                 <td>
                     <a class="btn btn-outline-danger" asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
-                               
+
                     <a class="btn btn-outline-success" asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
-                    <a class="btn btn-outline-primary"  asp-controller="products" asp-action="getbyid" asp-route-productid="@item.Id">Git</a>
-                    
+                    <a class="btn btn-outline-primary" asp-controller="products" asp-action="getbyid" asp-route-productid="@item.Id">Git</a>
+
                 </td>
 
             </tr>

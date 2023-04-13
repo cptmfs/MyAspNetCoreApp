@@ -1,4 +1,5 @@
-﻿@{
+﻿@using MyAspNetCoreApp.Web.ViewModels;
+@{
     ViewData["Title"] = "GetById";
 }
 @model ProductViewModel
@@ -17,6 +18,17 @@
             <div>Stok : @Model.Stock</div>
             <div>Renk : @Model.Color</div>
             <div>İndirim Oranı : @Model.Discount</div>
+            <div>
+                @if (!String.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="~/images/@Model.ImagePath" />
+                }
+                else
+                {
+                            <img style="width:100px;" height="100px" ; src="~/images/noimage-300x225.jpg">
+
+                }
+               </div>
         </p>
     </div>
 </div>

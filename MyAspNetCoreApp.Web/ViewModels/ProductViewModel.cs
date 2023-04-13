@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyAspNetCoreApp.Web.ViewModels
@@ -30,5 +31,8 @@ namespace MyAspNetCoreApp.Web.ViewModels
         public DateTime? PublishDate { get; set; }
         public bool IsPublish { get; set; }
         public int? Discount { get; set; }
+        public IFormFile Image { get; set; }
+        [ValidateNever] //Bu işlemi bir validasyondan geçirme..
+        public string ImagePath { get; set; }
     }
 }
