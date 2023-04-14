@@ -13,6 +13,7 @@
     <div>
         <img style="width:100px;" height="100px;" src="@(String.IsNullOrEmpty(Model.ImagePath)? "/images/noimage-300x225.jpg" : "/images/"+Model.ImagePath)"/>
     </div>
+
     <div class="mb-3">
         <label for="Name" class="form-label">Ürün ismi :</label>
         <input class="form-control" asp-for="Name">
@@ -79,7 +80,14 @@
         <label for="formFileSm" class="form-label">Ürün Resim</label>
         <input class="form-control form-control-sm" asp-for="Image" type="file">
     </div>
+    <div class="mb-3">
 
+        <select class="form-select" asp-for="CategoryId" asp-items="@ViewBag.categorySelect">
+            <option value="">Kategori Seçiniz</option>
+        </select>
+        <span class="text-danger" asp-validation-for="CategoryId"></span>
+
+    </div>
 
     <button class="btn btn-primary" type="submit">Ürün Güncelle</button>
 

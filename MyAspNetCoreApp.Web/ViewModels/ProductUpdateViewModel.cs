@@ -33,6 +33,7 @@ namespace MyAspNetCoreApp.Web.ViewModels
         [ValidateNever]
         public IFormFile? Image { get; set; }
         [ValidateNever] //Bu işlemi bir validasyondan geçirme..
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
+        public int CategoryId { get; set; }
     }
 }

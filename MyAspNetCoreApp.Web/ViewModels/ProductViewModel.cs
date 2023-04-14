@@ -23,7 +23,7 @@ namespace MyAspNetCoreApp.Web.ViewModels
         [StringLength(500,MinimumLength =10, ErrorMessage = "İsim alanına min 10  , max 500 karakter girilebilir!")]
 
         public string Description { get; set; }
-        [Required(ErrorMessage = "Renk seçimi boş olamaz!")]
+        [Required(ErrorMessage = "Renk seçiniz!")]
 
         public string? Color { get; set; } // ?  = nullable 
         [Required(ErrorMessage = "Yayınlanma tarihi boş olamaz!")]
@@ -34,6 +34,10 @@ namespace MyAspNetCoreApp.Web.ViewModels
         [ValidateNever]
         public IFormFile? Image { get; set; }
         [ValidateNever] //Bu işlemi bir validasyondan geçirme..
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
+        [Required(ErrorMessage = "Kategori seçiniz!")]
+
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }
