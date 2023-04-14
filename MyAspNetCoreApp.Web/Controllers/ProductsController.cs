@@ -130,20 +130,26 @@ namespace MyAspNetCoreApp.Web.Controllers
                 //Modelstate valid geldiyse yani validasyon başarılı ise yinede veritabanına kayıt anında bir hata olusabilir diye try catch bloguyla kontrol edelim.
                 try
                 {
-                    var root = _fileProvider.GetDirectoryContents("wwwroot"); // Projenin kök klasörünü verir bu "" boş tırnak ile.
-                    var images = root.First(x => x.Name == "images"); //wwwroot klasöründeki adı images olanı al .
-
-                    var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName); 
-                    // GetExtension verilen dosyanın uzantısını alır. " nokta Jpg gibi "
-                    //
-
-                    var path = Path.Combine(images.PhysicalPath,randomImageName);//images klasörünün fiziksel yolunu al ( C:/Kaptan/github..vs gibi) birde newProduct'ın Image'inin dosya adını al.
-
-                    using var stream = new FileStream(path, FileMode.Create); //kaydetmek için stream oluşturmak zorunlu. path = kaydet , den sonra FileMode.Create = eğer yoksa oluştur.
-
-                      newProduct.Image.CopyTo(stream); // resmi wwwroot images'e kaydettik.
                     var product = _mapper.Map<Product>(newProduct); // maplemeyii yaptık
-                    product.ImagePath = randomImageName; // maplenmiş product'ın imagepath'ine upload edilen resmin dosya adını verdik.
+
+                    if (newProduct.Image!=null && newProduct.Image.Length>0)
+                    {
+                        var root = _fileProvider.GetDirectoryContents("wwwroot"); // Projenin kök klasörünü verir bu "" boş tırnak ile.
+                        var images = root.First(x => x.Name == "images"); //wwwroot klasöründeki adı images olanı al .
+
+                        var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName);
+                        // GetExtension verilen dosyanın uzantısını alır. " nokta Jpg gibi "
+                        //
+
+                        var path = Path.Combine(images.PhysicalPath, randomImageName);//images klasörünün fiziksel yolunu al ( C:/Kaptan/github..vs gibi) birde newProduct'ın Image'inin dosya adını al.
+
+                        using var stream = new FileStream(path, FileMode.Create); //kaydetmek için stream oluşturmak zorunlu. path = kaydet , den sonra FileMode.Create = eğer yoksa oluştur.
+
+                        newProduct.Image.CopyTo(stream); // resmi wwwroot images'e kaydettik.
+                        product.ImagePath = randomImageName; // maplenmiş product'ın imagepath'ine upload edilen resmin dosya adını verdik.
+
+                    }
+
                     _context.Products.Add(product); // ve bunu veritabanına ekledik..
                     _context.SaveChanges();
                     TempData["status"] = "Ürün Başarıyla Eklendi.";
@@ -248,10 +254,10 @@ namespace MyAspNetCoreApp.Web.Controllers
 
             }, "Value", "Data", product.Color);
 
-            return View(_mapper.Map<ProductViewModel>(product));
+            return View(_mapper.Map<ProductUpdateViewModel>(product));
         }
         [HttpPost]
-        public IActionResult Update(ProductViewModel updateProduct)
+        public IActionResult Update(ProductUpdateViewModel updateProduct)
         {
             if (!ModelState.IsValid)
             {
@@ -273,6 +279,24 @@ namespace MyAspNetCoreApp.Web.Controllers
             }, "Value", "Data", updateProduct.Color);
 
                 return View();
+            }
+
+            if (updateProduct.Image != null && updateProduct.Image.Length > 0)
+            {
+                var root = _fileProvider.GetDirectoryContents("wwwroot"); // Projenin kök klasörünü verir bu "" boş tırnak ile.
+                var images = root.First(x => x.Name == "images"); //wwwroot klasöründeki adı images olanı al .
+
+                var randomImageName = Guid.NewGuid() + Path.GetExtension(updateProduct.Image.FileName);
+                // GetExtension verilen dosyanın uzantısını alır. " nokta Jpg gibi "
+                //
+
+                var path = Path.Combine(images.PhysicalPath, randomImageName);//images klasörünün fiziksel yolunu al ( C:/Kaptan/github..vs gibi) birde newProduct'ın Image'inin dosya adını al.
+
+                using var stream = new FileStream(path, FileMode.Create); //kaydetmek için stream oluşturmak zorunlu. path = kaydet , den sonra FileMode.Create = eğer yoksa oluştur.
+
+                updateProduct.Image.CopyTo(stream); // resmi wwwroot images'e kaydettik.
+                updateProduct.ImagePath = randomImageName; // maplenmiş product'ın imagepath'ine upload edilen resmin dosya adını verdik.
+
             }
             _context.Products.Update(_mapper.Map<Product>(updateProduct));
             _context.SaveChanges();

@@ -4,12 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyAspNetCoreApp.Web.ViewModels
 {
-    public class ProductViewModel
+    public class ProductUpdateViewModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="İsim alanı boş olamaz!")]
         [StringLength(50,ErrorMessage ="İsim alanına max 50 karakter girilebilir!")]
-        [Remote("HasProductName",controller: "Products")]
         public string? Name { get; set; }
         [Required(ErrorMessage = "Fiyat alanı boş olamaz!")]
         [Range(1, 1000000, ErrorMessage = "Fiyat 1 ile 1000000 ₺ arası olmalıdır!")]
