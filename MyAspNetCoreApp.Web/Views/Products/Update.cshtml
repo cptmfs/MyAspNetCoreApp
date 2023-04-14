@@ -9,10 +9,9 @@
 
 <form asp-controller="Products" asp-action="Update" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="ImagePath" />
+    <input type="hidden" asp-for="ImagePath">
     <div>
         <img style="width:100px;" height="100px;" src="@(String.IsNullOrEmpty(Model.ImagePath)? "/images/noimage-300x225.jpg" : "/images/"+Model.ImagePath)"/>
-
     </div>
     <div class="mb-3">
         <label for="Name" class="form-label">Ürün ismi :</label>
