@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@section Scripts
+    {
+    <script type="text/javascript">
+        /*aşağıdaki döküman yüklendiği zaman bu function içindeki kodlar çalışsın*/
+        $(document).ready(function () {
+
+            function loadComments() {
+                $("#loading").show();
+                $.ajax({
+                    type: "GET",
+                    url: "/VisitorAjax/VisitorCommentList",
+                    success: function (data) {
+                        console.log(data);
+                        $("#comments").html("");
+                        $.each(data, function (index, item) {
+                            let comment = `<div class="w3-card-4 w3-dark-grey mb-3" style="width:30%">
+                                                            <div class="w3-container w3-center">
+                                                            <h3>${item.name}</h3>
+                                                                    <h5>${item.date}</h5>
+                                                                    <p>${item.comment}</p>
+                                                            <a class="w3-button w3-green" asp-controller="home" asp-action="update" asp-route-id="${item.Id}">Güncelle</a>
+                                                                    <a class="w3-button w3-red" asp-controller="home" asp-action="remove" asp-route-id="${item.Id}">Sil</a></div></div>`;
+                            $("#comments").append(comment);
+
+                        })
+                        $("#loading").hide();
+
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                })
+            }
+            loadComments();
+            $("#btnSave").click(function () {
+                var name = $("#Name").val();
+
+                var comment = $("#Comment").val();
+
+                var jsonData = { "name": name, "comment": comment };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/VisitorAjax/SaveVisitorComment",
+                    data: jsonData,
+                    success: function (data) {
+                        alert("yorum kaydedildi");
+                        loadComments();
+                        console.log(data);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+
+<div id="comments">
+
+
+</div>
+
+<div id="loading">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="Name" class="form-label">İsim</label>
+    <input class="form-control" id="Name">
+</div>
+<div class="form-floating mb-3">
+    <textarea id="Comment" class="form-control" placeholder="Yorum Yap" style="height:100px"></textarea>
+    <label for="Comment">Yorum Yap</label>
+
+</div>
+<button id="btnSave" type="button" class="btn btn-primary">Kaydet</button>
+
