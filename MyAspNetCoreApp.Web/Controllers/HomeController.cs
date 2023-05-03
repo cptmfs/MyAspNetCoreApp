@@ -87,5 +87,9 @@ namespace MyAspNetCoreApp.Web.Controllers
             _context.SaveChanges();
             return RedirectToAction("Visitor");
         }
+        public IActionResult CSS()
+        {
+            return View();
+        }
     }
 }
